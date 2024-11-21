@@ -1,39 +1,72 @@
 ﻿@model IEnumerable<TblUser>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "User Management";
 }
 
-<h1>User Management</h1>
-
-<div>
-    <div>
-        <a asp-action="Create">Create New
-        <i class="fa fa-plus"></i>
-        </a>
+<div class="container-fluid px-4">
+    <div class="card shadow-sm mt-4">
+        <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+            <h2 class="mb-0">User Management</h2>
+            <a asp-action="Create" class="btn btn-light d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus me-2" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-1.7 3-2 4.3-.5.3.3.5.8.6 1.3.7.7 1.5 1 2.4 1s1.7-.3 2.4-1c.1-.5.3-1 .6-1.3 1.4-1.7 3-2 4.3-.5.2.3.3.8.3 1.3zm-3.4-1.3c-1-.8-2.4-.8-3.4 0-.6.5-1.3 1-2.1.6-.8-.4-.4-1.5.2-2.1.4-.4 1-.7 1.7-.7H7c.7 0 1.3.3 1.7.7.6.6 1 1.7.2 2.1-.8.4-1.5-.1-2.1-.6z" />
+                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
+                </svg>
+                Create New User
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.UserId</td>
+                                <td>@user.Email</td>
+                                <td>@user.Fullname</td>
+                                <td>@user.RoleId</td>
+                                <td>
+                                    <span class="badge @(user.Status is true? "bg-success" : "bg-secondary")">
+                                        @user.Status
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@user.UserId" class="btn btn-sm btn-outline-primary" title="Edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.293zm-12.5-4a.5.5 0 0 0-.5.5v.5h.5a.5.5 0 0 0 .5-.5V1a.5.5 0 0 0-.5-.5z" />
+                                            </svg>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@user.UserId" class="btn btn-sm btn-outline-info" title="Details">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                            </svg>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@user.UserId" class="btn btn-sm btn-outline-danger" title="Delete">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>UserId</th>
-                <th>Password</th>
-                <th>Fullname</th>
-                <th>RoleId</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
-                <tr>
-                    <td>@obj.UserId</td>
-                    <td>@obj.Password</td>
-                    <td>@obj.Fullname</td>
-                    <td>@obj.RoleId</td>
-                    <td>@obj.Status</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
 </div>

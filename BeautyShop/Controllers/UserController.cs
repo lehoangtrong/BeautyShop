@@ -22,5 +22,18 @@ namespace BeautyShop.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(TblUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.TblUsers.Add(user);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
