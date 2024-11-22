@@ -33,7 +33,63 @@ namespace BeautyShop.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(user);
+        }
+
+        // GET 
+        public IActionResult Edit(string id)
+        {
+            if (id == null || id == "")
+            {
+                return NotFound();
+            }
+            var user = _db.TblUsers.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(TblUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.TblUsers.Update(user);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+
+        public IActionResult Details(string id)
+        {
+            if (id == null || id == "")
+            {
+                return NotFound();
+            }
+            var user = _db.TblUsers.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        public IActionResult Delete(string id)
+        {
+            if (id == null || id == "")
+            {
+                return NotFound();
+            }
+            var user = _db.TblUsers.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
         }
     }
 }

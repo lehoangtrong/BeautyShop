@@ -1,0 +1,68 @@
+﻿@model TblUser
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<div class="container-fluid px-4">
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-lines-fill me-2" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm9-3h-2v1h2V5zm-2-1h2V3h-2v1zm-2 5h2V8h-2v1zm0 1h2v-1h-2v1zm2 3h-2v1h2v-1zm-2 1h2v-1h-2v1zm-2-6h2V7h-2v1zm2 0h-2V6h2v1z" />
+                </svg>
+                User Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">User ID</label>
+                    <p class="form-control-plaintext">@Model.UserId</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Full Name</label>
+                    <p class="form-control-plaintext">@Model.Fullname</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <p class="form-control-plaintext">@Model.Email</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Role</label>
+                    <p class="form-control-plaintext">
+                        @if (Model.RoleId == "AD")
+                        {
+                            <span class="badge bg-success">Admin</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-info">User</span>
+                        }
+                    </p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Status</label>
+                    <p class="form-control-plaintext">
+                        @if (Model.Status)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Inactive</span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-action="Index" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fill-rule="evenodd" d="M6.354 11.354a.5.5 0 0 1-.708-.708L9.293 7.293 5.646 3.646a.5.5 0 1 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4z" />
+                </svg>
+                Back to List
+            </a>
+        </div>
+    </div>
+</div>
